@@ -1,0 +1,133 @@
+﻿<Window x:Class="Scene_loading.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Scene loading" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" TextOptions.TextFormattingMode="Display">
+
+    <Grid>
+
+        <Grid Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Column="0" Header="Render" Margin="0 0 10 0" Padding="5">
+                <Canvas>
+                    <Image x:Name="render"/>
+                </Canvas>
+            </GroupBox>
+
+            <StackPanel Grid.Column="1">
+
+                <GroupBox Header="Parameters" Padding="5">
+                    <StackPanel>
+
+                        <TextBlock>
+                                View angle: <TextBlock x:Name="pZoom"/>
+                                &#186;
+                            </TextBlock>
+
+                        <TextBlock>
+                                FPS: <TextBlock x:Name="pFPS"/>
+                            </TextBlock>
+
+                        <TextBlock>
+                                FPS min: <TextBlock x:Name="pFPSlow"/>
+                            </TextBlock>
+
+                        <TextBlock>
+                                FPS max: <TextBlock x:Name="pFPSHigh"/>
+                            </TextBlock>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Camera position" Padding="5">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0">
+                                X <TextBlock x:Name="pCamPosX" />
+                            </TextBlock>
+
+                        <TextBlock Grid.Column="1">
+                                Y <TextBlock x:Name="pCamPosY" />
+                            </TextBlock>
+
+                        <TextBlock Grid.Column="2">
+                                Z <TextBlock x:Name="pCamPosZ" />
+                            </TextBlock>
+
+                    </Grid>
+
+                </GroupBox>
+
+                <GroupBox Header="Camera rotation" Padding="5">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0">
+                                X <TextBlock x:Name="pCamRotX" />&#186;
+                            </TextBlock>
+
+                        <TextBlock Grid.Column="1">
+                                Y <TextBlock x:Name="pCamRotY" />&#186;
+                            </TextBlock>
+
+                        <TextBlock Grid.Column="2">
+                                Z <TextBlock x:Name="pCamRotZ" />&#186;
+                            </TextBlock>
+                    </Grid>
+
+                </GroupBox>
+
+                <GroupBox Header="How to control the camera?" Padding="5">
+
+                    <StackPanel>
+
+                        <TextBlock>
+                                
+                                <Bold>Movement:</Bold><LineBreak />
+                                W, S - forward, backwards<LineBreak />
+                                A, D - left, right<LineBreak />
+                                E, C - up, down<LineBreak />
+                                <Bold>Rotation:</Bold><LineBreak />
+                                O, L - around the X axis<LineBreak />
+                                K, ; - around the Y axis<LineBreak />
+                                I, P - around the Z axis<LineBreak />
+                                <Bold>Zoom:</Bold><LineBreak />
+                                Rouse wheel
+
+                        </TextBlock>
+
+                    </StackPanel>
+
+                </GroupBox>
+
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+    
+</Window>
