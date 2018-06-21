@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Engine.Components
 {
-    // Axis of rotation.
     public enum Axis
     {
         X = 0,
@@ -13,7 +12,6 @@ namespace Engine.Components
         Z = 2
     }
 
-    // Relative space
     public enum RelativeSpace
     {
         World,
@@ -50,7 +48,7 @@ namespace Engine.Components
         // Field of view in radians.
         public float FieldOfViewRadians
         {
-            get { return (float)(FieldOfView / 180 * Math.PI); }
+            get { return (float) (FieldOfView / 180 * Math.PI); }
             set { FieldOfView = (float) (value * 180 / Math.PI); }
         }
 
@@ -64,7 +62,6 @@ namespace Engine.Components
         public Matrix LookAtLH()
         {
             var cameraRotationMatrix = Matrix.RotationQuaternion(Rotation);
-
             var cameraLookDirection = Vector3.TransformCoordinate(LookDirection, cameraRotationMatrix);
             var cameraUpDirection = Vector3.TransformCoordinate(UpDirection, cameraRotationMatrix);
 

@@ -83,11 +83,11 @@ namespace Engine.Utilities
             var c = lx * ry - ly * rx;
             var d = lx * rx + ly * ry + lz * rz;
 
-            return new Quaternion(
-                lx * rw + rx * lw + a,
-                ly * rw + ry * lw + b,
-                lz * rw + rz * lw + c,
-                lw * rw - d);
+            return new Quaternion
+                (lx * rw + rx * lw + a,
+                 ly * rw + ry * lw + b,
+                 lz * rw + rz * lw + c,
+                 lw * rw - d);
         }
     }
 }

@@ -52,6 +52,11 @@ namespace Scene_loading.Models
 
             _scene = SceneImporter.LoadJsonFile(Path.Combine("Resources", "scene.unity.babylon"));
             _scene.Meshes.First(m => m.Name == "Plane").Color = Engine.Utilities.Colors.DarkGrey;
+
+            //_scene.Meshes.Add(new Cube());
+            //_scene.Meshes.Add(new Sphere());
+            //_scene.Meshes.Add(new Cone());
+            //_scene.Meshes.Add(new Tube());
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

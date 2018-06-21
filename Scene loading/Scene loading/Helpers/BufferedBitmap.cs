@@ -58,15 +58,17 @@ namespace Scene_loading.Helpers
         {
             if (x < 0 || y < 0 || x >= PixelWidth || y >= PixelHeight) return;
 
+            // We have a 1D Array as our back buffer, we need to know 
+            // the equivalent cell in 1D based on the 2D coordiantes on screen.
             var offset = (x + y * PixelWidth) * 4;
+
             _backBuffer[offset] = color.B;
             _backBuffer[offset + 1] = color.G;
             _backBuffer[offset + 2] = color.R;
             _backBuffer[offset + 3] = color.A;
         }
 
-        // When the buffer is ready, it will be pushed into the bitmap.
-        // So that the frame of the animation could be displayed on the screen.
+        // When the buffer (back buffer) is ready, it will be pushed into the bitmap (front buffer).
         public void Present()
         {
             var rect = new Int32Rect(0, 0, PixelWidth, PixelHeight);

@@ -27,6 +27,8 @@ namespace Engine.Components
         {
             var point = Vector3.TransformCoordinate(coord, transMat);
 
+            // We transform the point (based on the corrdiante system)
+            // To have x:0, y:0 starting from the top left
             var x = Bitmap.PixelWidth * (point.X + 0.5f);
             var y = Bitmap.PixelHeight * (-point.Y + 0.5f);
 
@@ -60,7 +62,7 @@ namespace Engine.Components
                 // Matrix multiplication combining all transformations in the correct order.
                 var transformMatrix = worldMatrix * viewMatrix * projectionMatrix;
 
-                // 3D coordiantes to 2D coordiantes on a bitmap.
+                // 3D coordinantes to 2D coordinantes on a bitmap.
                 var pixels = mesh.Vertices.Select(vertex => Project(vertex, transformMatrix)).ToArray();
 
                 var vertices = mesh.Vertices.Select(vertex => Vector3.TransformCoordinate(vertex, worldMatrix * viewMatrix)).ToArray();

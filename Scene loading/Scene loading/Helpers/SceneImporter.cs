@@ -27,38 +27,91 @@ namespace Scene_loading.Helpers
             {
                 var meshJson = (JObject) jToken;
 
-                if (meshJson["positions"].Type == JTokenType.Null) continue;
-
-                var verticesArray = (JArray) meshJson["positions"];
-                var indicesArray = (JArray) meshJson["indices"];
-
-                var verticesCount = verticesArray.Count / 3;
-                var facesCount = indicesArray.Count / 3;
-
-                var mesh = new Mesh(verticesCount, facesCount)
+                if (meshJson["vertices"] == null)
                 {
-                    Position = ParseVector3(meshJson["position"]),
-                    Rotation = ParseQuaternion(meshJson["rotation"]),
-                    Scaling = ParseVector3(meshJson["scaling"]),
-                    Name = (string) meshJson["name"]
-                };
+                    if(((string)meshJson["name"]).Equals("Cube"))
+                    {
+                        var mesh = new Cube((float) meshJson["length"], (float) meshJson["width"], (float) meshJson["height"])
+                        {
+                            Position = ParseVector3(meshJson["position"]),
+                            Rotation = ParseQuaternion(meshJson["rotation"]),
+                            Scaling = ParseVector3(meshJson["scaling"]),
+                            Name = (string)meshJson["name"]
+                        };
 
-                for(int i = 0; i < verticesCount; i++)
-                {
-                    mesh.Vertices[i] = ParseVector3(verticesArray, i * 3);
+                        scene.Meshes.Add(mesh);
+                    }
+                    else if(((string)meshJson["name"]).Equals("Sphere"))
+                    {
+                        var mesh = new Sphere((float) meshJson["radius"], (int) meshJson["numberLongtitude"], (int) meshJson["numberLatitude"])
+                        {
+                            Position = ParseVector3(meshJson["position"]),
+                            Rotation = ParseQuaternion(meshJson["rotation"]),
+                            Scaling = ParseVector3(meshJson["scaling"]),
+                            Name = (string)meshJson["name"]
+                        };
+
+                        scene.Meshes.Add(mesh);
+                    }
+                    else if (((string)meshJson["name"]).Equals("Cone"))
+                    {
+                        var mesh = new Cone((float) meshJson["height"], (float) meshJson["bottomRadius"], (float) meshJson["topRadius"], (int) meshJson["numberSides"], (int) meshJson["numberHeight"])
+                        {
+                            Position = ParseVector3(meshJson["position"]),
+                            Rotation = ParseQuaternion(meshJson["rotation"]),
+                            Scaling = ParseVector3(meshJson["scaling"]),
+                            Name = (string)meshJson["name"]
+                        };
+
+                        scene.Meshes.Add(mesh);
+                    }
+                    else if (((string)meshJson["name"]).Equals("Cylinder"))
+                    {
+                        var mesh = new Cylinder((float) meshJson["height"], (float) meshJson["bottomRadius1"], (float)meshJson["bottomRadius2"], (float) meshJson["topRadius1"], (float) meshJson["topRadius2"], (int) meshJson["numberSides"])
+                        {
+                            Position = ParseVector3(meshJson["position"]),
+                            Rotation = ParseQuaternion(meshJson["rotation"]),
+                            Scaling = ParseVector3(meshJson["scaling"]),
+                            Name = (string)meshJson["name"]
+                        };
+
+                        scene.Meshes.Add(mesh);
+                    }
                 }
-
-                // Import triangles.
-                for(int i = 0; i < facesCount; i++)
+                else
                 {
-                    var a = (int) indicesArray[i * 3];
-                    var b = (int) indicesArray[i * 3 + 1];
-                    var c = (int) indicesArray[i * 3 + 2];
+                    // Plane
+                    var verticesArray = (JArray)meshJson["vertices"];
+                    var indicesArray = (JArray)meshJson["indices"];
 
-                    mesh.Faces[i] = new Face(a, b, c);
+                    var verticesCount = verticesArray.Count / 3;
+                    var facesCount = indicesArray.Count / 3;
+
+                    var mesh = new Mesh(verticesCount, facesCount)
+                    {
+                        Position = ParseVector3(meshJson["position"]),
+                        Rotation = ParseQuaternion(meshJson["rotation"]),
+                        Scaling = ParseVector3(meshJson["scaling"]),
+                        Name = (string)meshJson["name"]
+                    };
+
+                    for (int i = 0; i < verticesCount; i++)
+                    {
+                        mesh.Vertices[i] = ParseVector3(verticesArray, i * 3);
+                    }
+
+                    // Import triangles.
+                    for (int i = 0; i < facesCount; i++)
+                    {
+                        var a = (int)indicesArray[i * 3];
+                        var b = (int)indicesArray[i * 3 + 1];
+                        var c = (int)indicesArray[i * 3 + 2];
+
+                        mesh.Faces[i] = new Face(a, b, c);
+                    }
+
+                    scene.Meshes.Add(mesh);
                 }
-
-                scene.Meshes.Add(mesh);
             }
 
             // Import camera settings.
