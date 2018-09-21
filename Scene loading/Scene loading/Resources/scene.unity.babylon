@@ -74,7 +74,7 @@
     },
     {
       "name": "Sphere",
-      "radius": 1,
+      "radius": 0.5,
       "numberLongtitude": 24,
       "numberLatitude": 16,
       "position": [ -3.98, 2, 2.55 ],
@@ -85,7 +85,7 @@
       "name": "Cone",
       "height": 1,
       "bottomRadius": 0.25,
-      "topRadius": 0.05,
+      "topRadius": 0.25,
       "numberSides": 18,
       "numberHeight": 1,
       "position": [ 0.0532, 0.0165, -0.0130 ],
